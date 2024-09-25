@@ -31,8 +31,11 @@ class HomeController extends Controller
             'id', 'name', 'email',
         ])->first();
 
+        $users = User::all();
+
         return view('home', [
             'user' => $user,
+            'users' => $users,
         ]);
     }
 
