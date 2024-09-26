@@ -9,11 +9,11 @@ const ChatBox = ({ rootUrl }) => {
     const allUsersData = document.getElementById('main').getAttribute('data-all-users');
 
     const user = JSON.parse(userData);
-    const allUsers = JSON.parse(allUsersData);
-    // `App.Models.User.${user.id}`;
-    const webSocketChannel = `channel_for_everyone`;
+    const allUsers = JSON.parse(allUsersData).filter(u => u.id !== user.id);
+    const webSocketChannel = `App.Models.User.${user.id}`;
 
     const [messages, setMessages] = useState([]);
+    const [recipientId, setRecipientId] = useState(allUsers[0].id);
     const scroll = useRef();
 
     const scrollToBottom = () => {
@@ -30,8 +30,9 @@ const ChatBox = ({ rootUrl }) => {
 
     const getMessages = async () => {
         try {
-            const m = await axios.get(`${rootUrl}/messages`);
-            setMessages(m.data);
+            const m = await axios.get(`${rootUrl}/messages`);      
+            const filtered = m.data.filter(m => m.user_id === user.id && m.recipient_id === recipientId || m.user_id === recipientId && m.recipient_id === user.id);
+            setMessages(filtered);
             setTimeout(scrollToBottom, 0);
         } catch (err) {
             console.log(err.message);
@@ -45,7 +46,7 @@ const ChatBox = ({ rootUrl }) => {
         return () => {
             window.Echo.leave(webSocketChannel);
         }
-    }, []);
+    }, [recipientId]);
 
     function renderAllUsers() {
         return allUsers?.map((u) => {
@@ -53,13 +54,17 @@ const ChatBox = ({ rootUrl }) => {
                 return null;
             }
             return (
-                <a href="">
-                    <div key={u.id}>
-                        <p>{u.name}</p>
-                    </div>
-                </a>
+                <div key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
+                    <p>{u.name}</p>
+                </div>
             );
         })
+    }
+
+    function handleUserClick(userId) {
+        setRecipientId(userId);
+        console.log(recipientId);        
+        // getMessages();
     }
 
     return (
@@ -70,7 +75,7 @@ const ChatBox = ({ rootUrl }) => {
                     {renderAllUsers()}
                 </div>
                 <div className="card-footer">
-                    <a href="" className=""><p>{user.name}</p></a>
+                    <a href="" className="" key={user.id}><p>{user.name}</p></a>
                 </div>
             </div>
             <div className="row w-75">
@@ -90,7 +95,7 @@ const ChatBox = ({ rootUrl }) => {
                             <span ref={scroll}></span>
                         </div>
                         <div className="card-footer">
-                            <MessageInput rootUrl={rootUrl} />
+                            <MessageInput rootUrl={rootUrl} recipientId={recipientId}/>
                         </div>
                     </div>
                 </div>

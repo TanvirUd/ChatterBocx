@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
-const MessageInput = ({ rootUrl }) => {
-    const [message, setMessage] = useState("");
+const MessageInput = ({ rootUrl, recipientId}) => {
+    const [message, setMessage] = useState("");    
 
     const messageRequest = async (text) => {
         try {
-            await axios.post(`${rootUrl}/message`, {
+            const response = await axios.post(`${rootUrl}/message`, {
+                recipientId: recipientId,
                 text,
             });
+            console.log(response.data);
         } catch (err) {
             console.log(err.message);
         }

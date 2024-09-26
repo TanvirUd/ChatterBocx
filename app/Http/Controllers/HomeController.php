@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+use function Illuminate\Log\log;
+
 class HomeController extends Controller
 {
     /**
@@ -41,20 +43,30 @@ class HomeController extends Controller
 
     public function messages(): JsonResponse {
         $messages = Message::with('user')->get()->append('time');
-
         return response()->json($messages);
     }
 
     public function message(Request $request): JsonResponse {
-        $message = Message::create([
-            'user_id' => auth()->id(),
-            'text' => $request->get('text'),
-        ]);
-        SendMessage::dispatch($message);
+        try {
+            $message = Message::create([
+                'user_id' => auth()->id(),
+                'recipient_id' => (int) $request->get('recipientId'),
+                'text' => $request->get('text'),
+            ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => "Message created and job dispatched.",
-        ]);
+            log($message);
+
+            SendMessage::dispatch($message);
+    
+            return response()->json([
+                'success' => true,
+                'message' => "Message created and job dispatched.",
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
