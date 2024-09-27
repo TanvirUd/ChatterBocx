@@ -33,7 +33,7 @@ class HomeController extends Controller
             'id', 'name', 'email',
         ])->first();
 
-        $users = User::all();
+        $users = User::select(['id', 'name', 'email'])->get();
 
         return view('home', [
             'user' => $user,
@@ -42,7 +42,11 @@ class HomeController extends Controller
     }
 
     public function messages(): JsonResponse {
-        $messages = Message::with('user')->get()->append('time');
+        $messages = Message::where('user_id', auth()->id())
+                            ->orWhere('recipient_id', auth()->id())
+                            ->with('user')
+                            ->get()
+                            ->append('time');
         return response()->json($messages);
     }
 
@@ -53,8 +57,6 @@ class HomeController extends Controller
                 'recipient_id' => (int) $request->get('recipientId'),
                 'text' => $request->get('text'),
             ]);
-
-            log($message);
 
             SendMessage::dispatch($message);
     
