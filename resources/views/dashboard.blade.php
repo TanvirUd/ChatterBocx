@@ -79,9 +79,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-end mb-3">
-                        <button class="btn btn-outline-secondary">
-                            Modifier <i class="bi bi-pencil-square"></i>
-                        </button>
+                        <a href="{{ route('editUser') }}" class="btn btn-outline-secondary">Modifier</a>
                     </div>
                     <h5>Informations :</h5>
                     <div class="row">
