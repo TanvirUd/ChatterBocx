@@ -13,7 +13,7 @@ use function Illuminate\Log\log;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Crée une nouvelle instance de contrôleur.
      *
      * @return void
      */
@@ -23,7 +23,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Affiche l'écran d'accueil.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -41,16 +41,30 @@ class HomeController extends Controller
         ]);
     }
 
-    public function messages(): JsonResponse {
+    /**
+     * Renvoie les messages de l'utilisateur connecté.
+     * Les messages sont triés par ordre de date de création.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function messages(): JsonResponse
+    {
         $messages = Message::where('user_id', auth()->id())
                             ->orWhere('recipient_id', auth()->id())
                             ->with('user')
                             ->get()
                             ->append('time');
+
         return response()->json($messages);
     }
 
-    public function message(Request $request): JsonResponse {
+    /**
+     * Crée un nouveau message.
+     * Le message est stocké en base de données et un job est créé pour l'envoyer.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function message(Request $request): JsonResponse
+    {
         try {
             $message = Message::create([
                 'user_id' => auth()->id(),
@@ -59,10 +73,10 @@ class HomeController extends Controller
             ]);
 
             SendMessage::dispatch($message);
-    
+
             return response()->json([
                 'success' => true,
-                'message' => "Message created and job dispatched.",
+                'message' => "Message sent and dispatched!",
             ]);
         } catch (\Exception $e) {
             return response()->json([
