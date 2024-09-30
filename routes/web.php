@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,12 +12,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])
-    ->name('home');
-Route::get('/messages', [HomeController::class, 'messages'])
-    ->name('messages');
-Route::post('/message', [HomeController::class, 'message'])
-    ->name('message');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::get('/messages', [HomeController::class, 'messages'])->name('messages');
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::post('/message', [HomeController::class, 'message'])->name('message');
+
+Route::get('/dashboard' , [DashboardController::class, 'dashboard'])->name('dashboard');
+
+Route::get('/modifier', [EditUserController::class, 'index'])->name('editUser');
