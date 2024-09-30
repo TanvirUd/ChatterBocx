@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserimgController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::post('/message', [HomeController::class, 'message'])
 
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/userimg', [UserimgController::class, 'index'])->name('userimg');
+Route::post('/sendimg', [UserimgController::class, 'store'])->name('sendimg');

@@ -30,10 +30,10 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::where('id', auth()->id())->select([
-            'id', 'name', 'email',
+            'id', 'name', 'email', 'image'
         ])->first();
 
-        $users = User::select(['id', 'name', 'email'])->get();
+        $users = User::select(['id', 'name', 'email', 'image'])->get();
 
         return view('home', [
             'user' => $user,
