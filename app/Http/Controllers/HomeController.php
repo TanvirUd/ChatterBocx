@@ -59,7 +59,7 @@ class HomeController extends Controller
             ]);
 
             SendMessage::dispatch($message);
-    
+
             return response()->json([
                 'success' => true,
                 'message' => "Message created and job dispatched.",
@@ -71,4 +71,12 @@ class HomeController extends Controller
             ], 500);
         }
     }
+
+    public function edit()
+    {
+        $user = User::where('id', auth()->id())->first();
+
+        return view('register', compact('user'));
+    }
+
 }
