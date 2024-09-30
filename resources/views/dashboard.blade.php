@@ -64,10 +64,10 @@
         <div class="col-md-4 mb-3">
             <div class="card text-center">
                 <div class="card-body">
-                    <div class="rounded-circle bg-secondary mx-auto" style="width: 100px; height: 100px;">
+                    <div class="rounded-circle bg-secondary mx-auto mb-3" style="width: 100px; height: 100px;">
                         <img src="" alt="">
-                        <ion-icon name="create-outline"></ion-icon>
                     </div>
+                    <button type="button" class="btn btn-secondary">Edit</button>
                     <h4 class="fw-bold mt-3">{{ $user->name }}</h4>
                     <p>{{ $user->email }}</p>
                 </div>
