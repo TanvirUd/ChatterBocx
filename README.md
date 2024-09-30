@@ -26,7 +26,14 @@ cd ChatterBocx
 
 Étape 3 : cree une base de donner en fonction du .env en locurrence ici "task_manager".
 
-![](C:\Users\lazaa\Documents\work\M2I\php\framework\laravel\fil-rouge-test\ChatterBocx\public\Capture%20d'écran%202024-09-30%20155742.png)
+```.env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=test
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
 Étape 4 : Installer les dépendances PHP
 
