@@ -24,8 +24,7 @@ class EditUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->user()->id],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->user()->id]
         ]);
 
         auth()->user()->update($request->all());
