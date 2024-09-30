@@ -36,5 +36,4 @@ class SendMessage implements ShouldQueue
             'text' => $this->message->text,
             'time' => $this->message->time,
         ]);
-    }
-}
+    }}

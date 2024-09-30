@@ -22,5 +22,4 @@ class Message extends Model
             "d M Y, H:i:s",
             strtotime($this->attributes['created_at'])
         );
-    }
-}
+    }}

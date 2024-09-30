@@ -28,6 +28,7 @@ const ChatBox = ({ rootUrl }) => {
     const [messages, setMessages] = useState([]);
 
     // Stocke l'id du destinataire courant dans l'état recipientId.
+    
     const [recipientId, setRecipientId] = useState(allUsers[0].id);
 
     // Stocke une référence vers le bouton "Send" dans la constante scroll.
@@ -87,26 +88,6 @@ const ChatBox = ({ rootUrl }) => {
     }, [recipientId]);
 
     /**
-     * Fonction qui renvoie la liste des utilisateurs autres que l'utilisateur actuel.
-     * Chaque utilisateur est affiché sous forme de lien cliquable.
-     * Lorsque l'utilisateur clique sur un utilisateur, la fonction {@link handleUserClick}
-     * est appelée avec l'id de l'utilisateur sur lequel on a cliqué.
-     * @returns {JSX.Element[]}
-     */
-    function renderAllUsers() {
-        return allUsers?.map((u) => {
-            if (u.id === user.id) {
-                return null;
-            }
-            return (
-                <div key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
-                    <p>{u.name}</p>
-                </div>
-            );
-        })
-    }
-
-    /**
      * Fonction qui est appelée lorsque l'utilisateur clique sur un utilisateur
      * dans la liste des utilisateurs.
      * Cette fonction met à jour l'id du destinataire courant.
@@ -119,16 +100,27 @@ const ChatBox = ({ rootUrl }) => {
     }
 
     return (
-        <div className="d-flex w-100 justify-content-center">
-            <div className="w-25 card">
-                {/* Affiche la liste des utilisateurs */}
-                <div className="card-header">Utilisateurs</div>
-                <div className="card-body">
-                    {renderAllUsers()}
-                </div>
-                {/* Affiche l'utilisateur actuel */}
-                <div className="card-footer">
-                    <a href="" className="" key={user.id}><p>{user.name}</p></a>
+        <div className="d-flex justify-content-center w-100 gap-3 ">
+            <div className="row w-25">
+                <div className="col">
+                    <div className="card">
+                        {/* Affiche la liste des utilisateurs */}
+                        <div className="card-header">Utilisateurs</div>
+                        <div className="card-body p-0" style={{height: "490px", overflowY: "auto"}}>
+                            {allUsers?.map((u) => (
+                                <div className={`p-2 ${recipientId === u.id ? "bg-primary text-light" : "bg-light user"} d-flex align-items-center gap-1`} key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
+                                    <img className="image rounded-circle user-img-small" src={`storage/images/${u.image}`} alt={`profile_image_user_${u.name}`} />
+                                    <p className="m-0">{u.name}</p>
+                                </div>
+                            ))}
+                            <span ref={scroll}></span>
+                        </div>
+                        {/* Affiche l'utilisateur actuel */}
+                        <div className="card-footer d-flex align-items-center gap-1">
+                            <img className="image rounded-circle user-img-small m-0" src={`storage/images/${user.image}`} alt={`profile_image_user_${user.name}`} />
+                            <a href="/dashboard" className="card-link text-decoration-none color-dark" key={user.id}><p className="m-0">{user.name}</p></a>
+                        </div>
+                    </div>                    
                 </div>
             </div>
             <div className="row w-75">
