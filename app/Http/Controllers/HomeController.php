@@ -29,6 +29,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
         $user = User::where('id', auth()->id())->select([
             'id', 'name', 'email', 'image'
         ])->first();

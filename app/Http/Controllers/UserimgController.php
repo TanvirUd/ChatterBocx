@@ -35,6 +35,6 @@ class UserimgController extends Controller
             auth()->user()->update(['image' => $imageName]);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 }

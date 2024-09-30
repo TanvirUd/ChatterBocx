@@ -65,9 +65,9 @@
             <div class="card text-center">
                 <div class="card-body">
                     <div class="rounded-circle bg-secondary mx-auto mb-3" style="width: 100px; height: 100px;">
-                        <img src="" alt="">
+                        <img src="{{asset('/storage/images/'.Auth::user()->image)}}" class="rounded-circle user-img-big" alt="">
                     </div>
-                    <button type="button" class="btn btn-secondary">Edit</button>
+                    <a href="{{ route('userimg') }}" class="btn btn-outline-secondary">Edit</a>
                     <h4 class="fw-bold mt-3">{{ $user->name }}</h4>
                     <p>{{ $user->email }}</p>
                 </div>
