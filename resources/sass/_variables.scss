@@ -5,3 +5,14 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+// App Colors
+$primary: rgb(255, 44, 33);
+$text-light: rgb(248, 250, 252);
+$text-dark: rgb(0, 0, 0);
+
+.user{
+    &:hover{
+        background-color: rgba($primary, 0.3) !important;
+    }
+}

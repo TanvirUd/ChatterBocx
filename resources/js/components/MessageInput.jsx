@@ -43,18 +43,31 @@ const MessageInput = ({ rootUrl, recipientId}) => {
         setMessage("");
     };
 
+
+    /**
+     * Gère l'événement de pression d'une touche clavier dans l'input de saisie du message.
+     * Si la touche pressée est "Entrée", envoie le formulaire.
+     * @param {KeyboardEvent} e L'événement de pression de la touche.
+     */
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            sendMessage(e);
+        }
+    };
+
     return (
-        <div className="input-group">
+        <div className="input-group gap-3">
             <input onChange={(e) => setMessage(e.target.value)}
                    autoComplete="off"
                    type="text"
                    className="form-control"
                    placeholder="Message..."
                    value={message}
+                   onKeyDown={handleKeyDown}
             />
             <div className="input-group-append">
                 <button onClick={(e) => sendMessage(e)}
-                        className="btn btn-primary"
+                        className="btn btn-primary text-light"
                         type="button">Send</button>
             </div>
         </div>
