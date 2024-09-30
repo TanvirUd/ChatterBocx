@@ -24,7 +24,7 @@ cd ChatterBocx
 
 Étape 2 : Cree un fichier ".env" a l'aide du fichier  ".env.example" en remplissant les informations de votre base de données
 
-Étape 3 : cree une base de donner en fonction du .env en locurrence ici "task_manager".
+Étape 3 : cree une base de donner en fonction du .env en locurrence ici "test".
 
 ```.env
 DB_CONNECTION=mysql
