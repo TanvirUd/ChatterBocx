@@ -85,4 +85,12 @@ class HomeController extends Controller
             ], 500);
         }
     }
+
+    public function edit()
+    {
+        $user = User::where('id', auth()->id())->first();
+
+        return view('register', compact('user'));
+    }
+
 }
