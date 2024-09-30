@@ -106,17 +106,19 @@ const ChatBox = ({ rootUrl }) => {
                     <div className="card">
                         {/* Affiche la liste des utilisateurs */}
                         <div className="card-header">Utilisateurs</div>
-                        <div className="card-body p-0" style={{height: "500px", overflowY: "auto"}}>
+                        <div className="card-body p-0" style={{height: "490px", overflowY: "auto"}}>
                             {allUsers?.map((u) => (
-                                <div className={`p-3 ${recipientId === u.id ? "bg-primary text-light" : "bg-light user"}`} key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
+                                <div className={`p-2 ${recipientId === u.id ? "bg-primary text-light" : "bg-light user"} d-flex align-items-center gap-1`} key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
+                                    <img className="image rounded-circle user-img-small" src={`storage/images/${u.image}`} alt={`profile_image_user_${u.name}`} />
                                     <p className="m-0">{u.name}</p>
                                 </div>
                             ))}
                             <span ref={scroll}></span>
                         </div>
                         {/* Affiche l'utilisateur actuel */}
-                        <div className="card-footer py-3">
-                            <a href="" className="card-link text-decoration-none color-dark" key={user.id}><p className="m-0">{user.name}</p></a>
+                        <div className="card-footer d-flex align-items-center gap-1">
+                            <img className="image rounded-circle user-img-small m-0" src={`storage/images/${user.image}`} alt={`profile_image_user_${user.name}`} />
+                            <a href="/dashboard" className="card-link text-decoration-none color-dark" key={user.id}><p className="m-0">{user.name}</p></a>
                         </div>
                     </div>                    
                 </div>
