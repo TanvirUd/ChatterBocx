@@ -11,6 +11,7 @@
             <div class="card-footer d-flex justify-content-center">
                 <form action="{{route('sendimg')}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <p>Upload Image (max size 10Mo)</p>
                     <input type="file" name="image">
                     <input type="submit" value="Upload">
                 </form>
