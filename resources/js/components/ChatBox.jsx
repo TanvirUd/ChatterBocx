@@ -18,10 +18,15 @@ const ChatBox = ({ rootUrl }) => {
     // et les stocke dans la variable allUsers.
     const allUsers = JSON.parse(allUsersData).filter(u => u.id !== user.id);
 
+    const [recipientId, setRecipientId] = useState(allUsers[0].id);
+
     // Crée le nom du canal WebSocket privé de l'utilisateur actuel.
     // Ce canal est utilisé pour recevoir les messages entre l'utilisateur actuel et
     // les autres utilisateurs.
-    const webSocketChannel = `App.Models.User.${user.id}`;
+    const webSocketChannel = `App.Models.User.${user.id}.${recipientId}`;
+    const webSocketChannel2 = `App.Models.User.${recipientId}.${user.id}`;
+
+    console.log(webSocketChannel, webSocketChannel2);
 
     // Stocke les messages entre l'utilisateur actuel et le destinataire courant
     // dans l'état messages.
@@ -29,7 +34,7 @@ const ChatBox = ({ rootUrl }) => {
 
     // Stocke l'id du destinataire courant dans l'état recipientId.
     
-    const [recipientId, setRecipientId] = useState(allUsers[0].id);
+    
 
     // Stocke une référence vers le bouton "Send" dans la constante scroll.
     // Ce bouton est utilisé pour scroller automatiquement vers le bas de la page
@@ -46,7 +51,7 @@ const ChatBox = ({ rootUrl }) => {
      * Cela signifie que lorsque l'utilisateur actuel reçoit un message, il le reçoit en direct.
      */
     const connectWebSocket = () => {
-        window.Echo.private(webSocketChannel)
+        window.Echo.private([webSocketChannel, webSocketChannel2])
             .listen('GotMessage', async (e) => {
                 // e.message est le message qui a été envoyé, mais on ne l'utilise pas ici.
                 // Au lieu de cela, on appelle la fonction getMessages pour récupérer les messages
@@ -85,7 +90,7 @@ const ChatBox = ({ rootUrl }) => {
         return () => {
             window.Echo.leave(webSocketChannel);
         }
-    }, [recipientId]);
+    });
 
     /**
      * Fonction qui est appelée lorsque l'utilisateur clique sur un utilisateur
