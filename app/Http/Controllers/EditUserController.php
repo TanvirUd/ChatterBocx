@@ -32,5 +32,18 @@ class EditUserController extends Controller
         return redirect()->route('dashboard')->with('success', 'Profile updated successfully.');
     }
 
+    public function showDeletePage()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
 
+        return view('delete');
+    }
+
+    public function delete()
+    {
+        auth()->user()->delete();
+        return redirect('/');
+    }
 }
