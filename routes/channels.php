@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Broadcast;
  * @param  int  $id
  * @return bool
  */
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+Broadcast::channel('App.Models.User.{id}.{recipientId}', function ($user, $id) {
     // Vérifie que l'utilisateur courant est bien l'utilisateur connecté
     // pour éviter que des utilisateurs mal intentionnés ne puissent
     // écouter les messages des autres utilisateurs.
