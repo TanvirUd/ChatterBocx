@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -23,4 +23,8 @@ Route::post('/sendimg', [UserimgController::class, 'store'])->name('sendimg');
 
 Route::get('/modifier', [EditUserController::class, 'index'])->name('editUser');
 Route::put('/update', [EditUserController::class, 'update'])->name('update');
+Route::get('/delete', [EditUserController::class, 'showDeletePage'])->name('delete');
+Route::get('/deleteAccount', [EditUserController::class, 'delete'])->name('deleteAccount');
+
+Route::get('/alone', [HomeController::class, 'alone'])->name('alone');
 

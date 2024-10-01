@@ -33,6 +33,10 @@ class HomeController extends Controller
             return redirect()->route('login');
         }
 
+        if (User::count() <= 1) {
+            return redirect()->route('alone');
+        }
+
         $user = User::where('id', auth()->id())->select([
             'id', 'name', 'email', 'image'
         ])->first();
@@ -95,6 +99,11 @@ class HomeController extends Controller
         $user = User::where('id', auth()->id())->first();
 
         return view('register', compact('user'));
+    }
+
+    public function alone()
+    {
+        return view('alone');
     }
 
 }

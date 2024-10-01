@@ -67,7 +67,7 @@
                     <div class="rounded-circle bg-secondary mx-auto mb-3" style="width: 100px; height: 100px;">
                         <img src="{{asset('/storage/images/'.Auth::user()->image)}}" class="rounded-circle user-img-big" alt="">
                     </div>
-                    <a href="{{ route('userimg') }}" class="btn btn-outline-secondary">Edit</a>
+                    <a href="{{ route('userimg') }}" class="btn btn-outline-secondary btn-sm">Edit</a>
                     <h4 class="fw-bold mt-3">{{ $user->name }}</h4>
                     <p>{{ $user->email }}</p>
                 </div>
@@ -78,7 +78,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-end mb-3">
+                    <div class="d-flex gap-2 justify-content-end mb-3">
+                        <a href="{{ route('delete') }}" class="btn btn-outline-danger">Suprimer</a>
                         <a href="{{ route('editUser') }}" class="btn btn-outline-secondary">Modifier</a>
                     </div>
                     <h5>Informations :</h5>
