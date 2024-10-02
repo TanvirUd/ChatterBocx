@@ -14,24 +14,33 @@ class GotMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    
     /**
-     * Create a new event instance.
+     * Instancie un nouveau GotMessage.
+     *
+     * @param array $message Un tableau contenant les informations du message (user_id, recipient_id, content)
      */
     public function __construct(public array $message)
     {
         //
     }
 
+
+
+
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * Spécifie les canaux de broadcast.
+     * Les canaux de broadcast sont des canaux privés,
+     * qui portent le nom de la classe du modèle "App\Models\User"
+     * suivis de l'ID de l'utilisateur et de l'ID du destinataire.
+     * @return array
      */
     public function broadcastOn(): array
     {
         // $this->message is available here
         
         return [
-            new PrivateChannel("App.Models.User.{$this->message['user_id']}"),
+            new PrivateChannel("App.Models.User.{$this->message['user_id']}.{$this->message['recipient_id']}"),
+            new PrivateChannel("App.Models.User.{$this->message['recipient_id']}.{$this->message['user_id']}"),
         ];
     }}
