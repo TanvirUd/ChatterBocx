@@ -18,6 +18,7 @@ const ChatBox = ({ rootUrl }) => {
     // et les stocke dans la variable allUsers.
     const allUsers = JSON.parse(allUsersData).filter(u => u.id !== user.id);
 
+    // Stocke l'id du destinataire courant dans l'état recipientId.
     const [recipientId, setRecipientId] = useState(allUsers[0].id);
 
     // Crée le nom du canal WebSocket privé de l'utilisateur actuel.
@@ -26,14 +27,9 @@ const ChatBox = ({ rootUrl }) => {
     const webSocketChannel = `App.Models.User.${user.id}.${recipientId}`;
     const webSocketChannel2 = `App.Models.User.${recipientId}.${user.id}`;
 
-    console.log(webSocketChannel, webSocketChannel2);
-
     // Stocke les messages entre l'utilisateur actuel et le destinataire courant
     // dans l'état messages.
-    const [messages, setMessages] = useState([]);
-
-    // Stocke l'id du destinataire courant dans l'état recipientId.
-    
+    const [messages, setMessages] = useState([]);    
     
 
     // Stocke une référence vers le bouton "Send" dans la constante scroll.
@@ -41,6 +37,12 @@ const ChatBox = ({ rootUrl }) => {
     // lorsque l'utilisateur actuel reçoit un message.
     const scroll = useRef();
 
+    /**
+     * Fait défiler la page jusqu'au bouton "Send" pour que l'utilisateur actuel
+     * voie le message qu'il vient d'envoyer.
+     * 
+     * @since 1.0.0
+     */
     const scrollToBottom = () => {
         scroll.current.scrollIntoView({ behavior: "smooth" });
     };
