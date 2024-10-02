@@ -25,6 +25,8 @@ Route::get('/modifier', [EditUserController::class, 'index'])->name('editUser');
 Route::put('/update', [EditUserController::class, 'update'])->name('update');
 Route::get('/delete', [EditUserController::class, 'showDeletePage'])->name('delete');
 Route::get('/deleteAccount', [EditUserController::class, 'delete'])->name('deleteAccount');
+Route::get('/modifyPassword', [EditUserController::class,'showPasswordPage'])->name('modifyPassword');
+Route::put('/updatePassword', [EditUserController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('/alone', [HomeController::class, 'alone'])->name('alone');
 
