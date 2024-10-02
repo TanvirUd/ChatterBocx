@@ -1,13 +1,6 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="" target="_blank"><img src="public/images/Logos/ChatterBocx-horizontal.png" width="700" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## Chatterboxs
+# Chatterboxs
 
 ## Description du projet
 
@@ -18,10 +11,14 @@ ChatterBocx est une application de messagerie instantanée en temps réel qui ut
 
 ### Prérequis :
 
-**PHP**
-**Composer**
-**Node**
-**MySQL**
+[**PHP**](https://www.php.net/downloads.php)
+
+[**Composer**](https://getcomposer.org/download/)
+
+[**Node**](https://nodejs.org/fr/download/package-manager)
+
+[**MySQL**](https://www.mysql.com/fr/products/community/)
+
 
 ### Installation :  
 
@@ -51,10 +48,10 @@ DB_PASSWORD=
 composer install
 ```
 
-**Étape 5** : Installer les dépendances NPM et les executer
+**Étape 5** : Installer les dépendances
 
 ```shell
-npm install && npm run dev
+npm install
 ```
 
 **Étape 6** : generer une cle d'application
@@ -69,16 +66,17 @@ php artisan key:generate
 php artisan migrate:fresh
 ```
 
-**Étape 8** : executer la commande php artisan optimize pour optimiser le code
+**Étape 8** : executer la commande php artisan optimize pour actualiser le code et les roots
 
 ```shell
 php artisan optimize
 ```
 
-**Étape 9** :  executer toutes les instance pour lancer l'application
+**Étape 9** :  executer toutes les instance pour lancer l'application (ces instances se déroulent en continu)
 
+*sauf celui-ci*
 ```shell
-npm run dev
+npm run build
 ```
 
 ```shell
