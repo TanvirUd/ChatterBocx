@@ -29,8 +29,8 @@ const ChatBox = ({ rootUrl }) => {
 
     // Stocke les messages entre l'utilisateur actuel et le destinataire courant
     // dans l'état messages.
-    const [messages, setMessages] = useState([]);    
-    
+
+    const [messages, setMessages] = useState([]);
 
     // Stocke une référence vers le bouton "Send" dans la constante scroll.
     // Ce bouton est utilisé pour scroller automatiquement vers le bas de la page
@@ -70,7 +70,7 @@ const ChatBox = ({ rootUrl }) => {
      */
     const getMessages = async () => {
         try {
-            const response = await axios.get(`${rootUrl}/messages`);      
+            const response = await axios.get(`${rootUrl}/messages`);
             const filtered = response.data.filter(m => m.user_id === user.id && m.recipient_id === recipientId || m.user_id === recipientId && m.recipient_id === user.id);
             setMessages(filtered);
             setTimeout(scrollToBottom, 0);
@@ -127,7 +127,7 @@ const ChatBox = ({ rootUrl }) => {
                             <img className="image rounded-circle user-img-small m-0" src={`storage/images/${user.image}`} alt={`profile_image_user_${user.name}`} />
                             <a href="/dashboard" className="card-link text-decoration-none color-dark" key={user.id}><p className="m-0">{user.name}</p></a>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
             <div className="row w-75">
