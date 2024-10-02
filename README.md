@@ -9,22 +9,32 @@
 
 ## Chatterboxs
 
-Chatterboxs est une application de messagerie instantaner destiner au professionnel.
+## Description du projet
 
-![](C:\Users\lazaa\Documents\work\M2I\php\framework\laravel\fil-rouge-test\ChatterBocx\public\ChatterBocs.png)
+ChatterBocx est une application de messagerie instantanée en temps réel qui utilise les WebSockets pour permettre aux utilisateurs de s'envoyer des messages en direct. L'application dispose de chaînes de discussion basées sur les utilisateurs, ce qui signifie que chaque utilisateur a sa propre chaîne de discussion accessible uniquement par lui-même et les utilisateurs qu'il a ajoutés en tant qu'amis. L'application a été développée avec Laravel et React.
 
-###Installation :  
 
-Étape 1 : cloner le repository
+![ChatterBocx app demo image](public/images/ChatterBocs.png)
+
+### Prérequis :
+
+**PHP**
+**Composer**
+**Node**
+**MySQL**
+
+### Installation :  
+
+**Étape 1** : cloner le repository
 
 ```shell
 git clone https://github.com/TanvirUd/ChatterBocx.git
 cd ChatterBocx
 ```
 
-Étape 2 : Cree un fichier ".env" a l'aide du fichier  ".env.example" en remplissant les informations de votre base de données
+**Étape 2** : Cree un fichier ".env" a l'aide du fichier  ".env.example".
 
-Étape 3 : cree une base de donner en fonction du .env en locurrence ici "test".
+**Étape 3** : Créez un cluster vide dans votre base de données et remplissez le champ DB_DATABASE avec le nom du cluster (par exemple, nous avons choisi "test" comme nom de base de données).
 
 ```.env
 DB_CONNECTION=mysql
@@ -35,37 +45,37 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Étape 4 : Installer les dépendances PHP
+**Étape 4** : Installer les dépendances PHP
 
 ```shell
 composer install
 ```
 
-Étape 5 : Installer les dépendances NPM et les executer
+**Étape 5** : Installer les dépendances NPM et les executer
 
 ```shell
 npm install && npm run dev
 ```
 
-Étape 6 : generer une cle d'application
+**Étape 6** : generer une cle d'application
 
 ```shell
 php artisan key:generate
 ```
 
-Étape 7 : faire une refresh de la migration pour appliquer toutes les données dans la base de données.
+**Étape 7** : faire une refresh de la migration pour appliquer toutes les données dans la base de données.
 
 ```shell
 php artisan migrate:fresh
 ```
 
-Étape 8 : executer la commande php artisan optimize pour optimiser le code
+**Étape 8** : executer la commande php artisan optimize pour optimiser le code
 
 ```shell
 php artisan optimize
 ```
 
-Étape 8 :  executer toutes les instance pour lancer l'application
+**Étape 9** :  executer toutes les instance pour lancer l'application
 
 ```shell
 npm run dev
@@ -87,6 +97,7 @@ php artisan serve
 
 Et si toutes les étapes ont été fait dans l'ordre l'application devrait marcher.
 
-## ## Credits
+## Credits
 
-- By Tanvir et Laza
+- TanvirUd
+- LazMan8
