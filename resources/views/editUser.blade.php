@@ -38,8 +38,13 @@
                                     @enderror
                                 </div>
 
-                                <!-- Bouton de soumission -->
-                                <button class="btn btn-outline-light btn-lg px-5 mt-4" type="submit">{{ __('Modifier') }}</button>
+                                 <div class="d-flex flex-column">
+                                    <!-- bouton modification de mot de passe -->
+                                    <a href="{{ route('modifyPassword') }}">{{ __('change Password') }}</a>
+
+                                    <!-- Bouton de soumission -->
+                                    <button class="btn btn-outline-light btn-lg px-5 mt-4" type="submit">{{ __('Modifier') }}</button>
+                                 </div>
                             </form>
 
                         </div>
