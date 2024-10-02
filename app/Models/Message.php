@@ -13,10 +13,20 @@ class Message extends Model
     public $table = 'messages';
     protected $fillable = ['id', 'user_id', 'recipient_id', 'text'];
 
+    /**
+     * Relation vers l'utilisateur qui a envoyé le message
+     *
+     * @return BelongsTo
+     */
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Renvoie le timestamp de la création du message au format "d M Y, H:i:s"
+     *
+     * @return string
+     */
     public function getTimeAttribute(): string {
         return date(
             "d M Y, H:i:s",
