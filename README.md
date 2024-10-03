@@ -95,6 +95,16 @@ php artisan serve
 
 Et si toutes les étapes ont été fait dans l'ordre l'application devrait marcher.
 
+## Tips
+
+Si vous souhaitez alimenter la base de données avec des utilisateurs, vous pouvez exécuter cette commande :
+
+```shell
+php artisan test
+```
+
+Rassurez-vous, cette opération n'alimente la base de données que lorsqu'il n'y a qu'un seul utilisateur ou moins. Vous pouvez donc exécuter le test autant de fois que vous le souhaitez par la suite. 
+
 ## Credits
 
 - TanvirUd
