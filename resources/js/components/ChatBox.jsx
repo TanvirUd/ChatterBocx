@@ -37,6 +37,8 @@ const ChatBox = ({ rootUrl }) => {
     // lorsque l'utilisateur actuel reçoit un message.
     const scroll = useRef();
 
+    const [userListDisplay, setUserListDisplay] = useState(false);
+
     /**
      * Fait défiler la page jusqu'au bouton "Send" pour que l'utilisateur actuel
      * voie le message qu'il vient d'envoyer.
@@ -111,13 +113,17 @@ const ChatBox = ({ rootUrl }) => {
         // getMessages();
     }
 
+    function handleUserListToggle(){
+        setUserListDisplay(!userListDisplay);
+    }
+
     return (
-        <div className="d-flex justify-content-center w-100 gap-3 ">
-            <div className="row w-25">
+        <div className="row show-grid position-relative">
+            <div className={`col-lg-3 col-lg-push-8 col-md-4 col-md-push-0 col-sm-4 col-sm-push-8 ${userListDisplay ? 'user-list-display-active': 'user-list-display-none'}`}>
                 <div className="col">
                     <div className="card">
                         {/* Affiche la liste des utilisateurs */}
-                        <div className="card-header">Utilisateurs</div>
+                        <div className="card-header"><span className="text-muted btn btn-outline-secondary user-list-button " onClick={handleUserListToggle}>List</span>Utilisateurs</div>
                         <div className="card-body p-0" style={{height: "490px", overflowY: "auto"}}>
                             {allUsers?.map((u) => (
                                 <div className={`p-2 ${recipientId === u.id ? "bg-primary text-light" : "bg-light user"} d-flex align-items-center gap-1`} key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
@@ -135,11 +141,11 @@ const ChatBox = ({ rootUrl }) => {
                     </div>
                 </div>
             </div>
-            <div className="row w-75">
+            <div className="col-lg-8 col-lg-pull-4 col-md-8 col-md-pull-0 col-sm-8 col-sm-pull-4">
                 <div className="col-md-8">
                     <div className="card">
                         {/* En-tête de la boîte de conversation */}
-                        <div className="card-header">Boîte de conversation</div>
+                        <div className="card-header"><span className="text-muted btn btn-outline-secondary user-list-button " onClick={handleUserListToggle}>List</span> Boîte de conversation</div>
                         {/* Corps de la boîte de conversation */}
                         <div className="card-body"
                             style={{height: "500px", overflowY: "auto"}}>
