@@ -47,19 +47,26 @@ const ChatBox = ({ rootUrl }) => {
         scroll.current.scrollIntoView({ behavior: "smooth" });
     };
 
+
     /**
      * Fonction qui se connecte au canal WebSocket privé de l'utilisateur actuel.
      * Lorsqu'un message est reçu sur ce canal, la fonction {@link getMessages} est appelée.
      * Cela signifie que lorsque l'utilisateur actuel reçoit un message, il le reçoit en direct.
      */
     const connectWebSocket = () => {
-        window.Echo.private([webSocketChannel, webSocketChannel2])
-            .listen('GotMessage', async (e) => {
-                // e.message est le message qui a été envoyé, mais on ne l'utilise pas ici.
-                // Au lieu de cela, on appelle la fonction getMessages pour récupérer les messages
-                // entre l'utilisateur actuel et le destinataire courant.
-                await getMessages();
-            });
+        window.Echo.private(webSocketChannel).listen('GotMessage', async (e) => {
+            // e.message est le message qui a été envoyé, mais on ne l'utilise pas ici.
+            // Au lieu de cela, on appelle la fonction getMessages pour récupérer les messages
+            // entre l'utilisateur actuel et le destinataire courant.
+            await getMessages();
+        });
+        
+        window.Echo.private(webSocketChannel2).listen('GotMessage', async (e) => {
+            // e.message est le message qui a été envoyé, mais on ne l'utilise pas ici.
+            // Au lieu de cela, on appelle la fonction getMessages pour récupérer les messages
+            // entre l'utilisateur actuel et le destinataire courant.
+            await getMessages();
+        });
     }
 
     /**
@@ -79,20 +86,18 @@ const ChatBox = ({ rootUrl }) => {
         }
     };
 
-
     useEffect(() => {
         // Récupère les messages entre l'utilisateur actuel et le destinataire courant
         // et connecte le websocket pour écouter les évenements 'GotMessage'
         // qui sont déclenchés pour chaque message envoyé ou reçu par l'utilisateur
         getMessages();
         connectWebSocket();
-
         // Dès que l'utilisateur change de destinataire, on quitte le canal websocket
         // pour ne plus recevoir les mises à jour des messages du précédent destinataire
         return () => {
             window.Echo.leave(webSocketChannel);
         }
-    });
+    }, []);
 
     /**
      * Fonction qui est appelée lorsque l'utilisateur clique sur un utilisateur
