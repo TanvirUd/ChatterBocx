@@ -54,27 +54,33 @@ composer install
 npm install
 ```
 
-**Étape 6** : generer une cle d'application
+**Étape 6** : Generer une cle d'application
 
 ```shell
 php artisan key:generate
 ```
 
-**Étape 7** : faire une refresh de la migration pour appliquer toutes les données dans la base de données.
+**Étape 7** : Faire une refresh de la migration pour appliquer toutes les données dans la base de données.
 
 ```shell
 php artisan migrate:fresh
 ```
 
-**Étape 8** : executer la commande php artisan optimize pour actualiser le code et les roots
+**Étape 8** : Lier le dossier de stockage au répertoire correct.
+
+```shell
+php artisan storage:link
+```
+
+**Étape 9** : Executer la commande php artisan optimize pour actualiser le code et les roots
 
 ```shell
 php artisan optimize
 ```
 
-**Étape 9** :  executer toutes les instance pour lancer l'application (ces instances se déroulent en continu)
+**Étape 10** :  Executer toutes les instance pour lancer l'application (ces instances se déroulent en continu)
 
-*sauf celui-ci*
+*sauf celui-ci, il ne se déroule pas en continu*
 ```shell
 npm run build
 ```
