@@ -3,17 +3,6 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * Comment this test on production
- */
-it('populated some users to the database', function(){
-    if(User::count() <= 1){
-        User::factory()->create()->times(10);
-    }
-
-    $this->assertNotEmpty(User::all());
-});
-
 it('can create a user', function () {
     $response = User::factory()->create();
 

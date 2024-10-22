@@ -16,4 +16,3 @@ Broadcast::channel('App.Models.User.{id}.{recipientId}', function ($user, $id, $
     // écouter les messages des autres utilisateurs.
     return (int) $user->id === (int) $id || (int) $user->id === (int) $recipientId;
 });
-

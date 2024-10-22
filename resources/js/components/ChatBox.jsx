@@ -79,10 +79,10 @@ const ChatBox = ({ rootUrl }) => {
      */
     const getMessages = async () => {
         try {
-            const response = await axios.get(`${rootUrl}/messages`);
-            const filtered = response.data.filter(m => m.user_id === user.id && m.recipient_id === recipientId || m.user_id === recipientId && m.recipient_id === user.id);
+            const response = await axios.get(`${rootUrl}/messages`);          
+            const filtered = response.data.filter(m => (m.user_id === user.id && m.recipient_id === recipientId) || (m.user_id === recipientId && m.recipient_id === user.id));
             setMessages(filtered);
-            setTimeout(scrollToBottom, 0);
+            setTimeout(scrollToBottom, 0);            
         } catch (err) {
             console.log(err.message);
         }
@@ -107,12 +107,12 @@ const ChatBox = ({ rootUrl }) => {
      * Cette fonction met à jour l'id du destinataire courant.
      * @param {number} userId L'id de l'utilisateur sur lequel on a cliqué.
      */
-    function handleUserClick(userId) {
+    const handleUserClick = async (userId) => {
         setRecipientId(userId);
-        getMessages();
+        await getMessages();        
     }
 
-    function handleUserListToggle(){
+    const handleUserListToggle = () => {
         setUserListDisplay(!userListDisplay);
     }
 
@@ -122,7 +122,7 @@ const ChatBox = ({ rootUrl }) => {
                 <div className="col">
                     <div className="card">
                         {/* Affiche la liste des utilisateurs */}
-                        <div className="card-header"><span className="text-muted btn btn-outline-secondary user-list-button " onClick={handleUserListToggle}>List</span>Utilisateurs</div>
+                        <div className="card-header"><span className="text-muted btn btn-outline-secondary user-list-button" onClick={handleUserListToggle}>List</span>Utilisateurs</div>
                         <div className="card-body p-0" style={{height: "490px", overflowY: "auto"}}>
                             {allUsers?.map((u) => (
                                 <div className={`p-2 ${recipientId === u.id ? "bg-primary text-light" : "bg-light user"} d-flex align-items-center gap-1`} key={u.id} onClick={() => handleUserClick(u.id)} style={{cursor: "pointer"}}>
