@@ -109,8 +109,7 @@ const ChatBox = ({ rootUrl }) => {
      */
     function handleUserClick(userId) {
         setRecipientId(userId);
-        console.log(recipientId);
-        // getMessages();
+        getMessages();
     }
 
     function handleUserListToggle(){
